@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import styled from 'styled-components';
+import Header from './Components/Header/index';
 import Post from './Components/Post/index';
-// import PropTypes from 'prop-types';
-import GlobalStyle from './styles/GlobalStyle';
-
-const PostsContainer = styled.div``;
+import GlobalStyle, { PostsContainer } from './styles/GlobalStyle';
 
 class App extends Component {
   state = {
@@ -12,21 +9,24 @@ class App extends Component {
       {
         id: '1',
         author: 'Pedro',
-        avatar: '',
+        avatar:
+          'https://cdn.shopify.com/s/files/1/0342/0081/products/Zoboomafoo_Zoboo_grande.png?v=1522168916',
         time: '3 min ago',
         body: 'test content goes here'
       },
       {
         id: '2',
         author: 'Silvio',
-        avatar: '',
+        avatar:
+          'https://cdn.shopify.com/s/files/1/0342/0081/products/Zoboomafoo_Zoboo_grande.png?v=1522168916',
         time: '1 hour ago',
         body: 'test content goes here'
       },
       {
         id: '3',
         author: 'Rodrigo',
-        avatar: '',
+        avatar:
+          'https://cdn.shopify.com/s/files/1/0342/0081/products/Zoboomafoo_Zoboo_grande.png?v=1522168916',
         time: '2 days ago',
         body: 'test content goes here'
       }
@@ -34,12 +34,14 @@ class App extends Component {
   };
 
   render() {
+    const { posts } = this.state;
     return (
       <Fragment>
         <GlobalStyle />
+        <Header />
         <PostsContainer>
-          {this.state.posts.map(post => (
-            <Post key={post.id} data={post} />
+          {posts.map(post => (
+            <Post key={post.id} {...post} />
           ))}
         </PostsContainer>
       </Fragment>
