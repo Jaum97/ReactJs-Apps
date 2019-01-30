@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+
 import api from '../../services/api';
+
+import RepoList from '../../components/RepoList/index';
 
 class Main extends Component {
   state = {
@@ -24,18 +27,13 @@ class Main extends Component {
         <form onSubmit={this.handleAddRepository}>
           <input
             type="text"
-            placeholder="user"
+            placeholder="user/repo"
             value={repositoryInput}
             onChange={e => this.setState({ repositoryInput: e.target.value })}
           />
         </form>
 
-        <ul>
-          <li>test</li>
-          {repositories.map(x => (
-            <li>{x.name}</li>
-          ))}
-        </ul>
+        <RepoList repositories={repositories} />
       </>
     );
   }
