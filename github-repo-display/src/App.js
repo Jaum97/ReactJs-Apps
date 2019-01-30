@@ -1,5 +1,10 @@
 import React from 'react';
+import Main from './pages/Main/index';
 
-const App = () => <h1>App</h1>;
+const App = () => (
+  <>
+    <Main />
+  </>
+);
 
 export default App;
