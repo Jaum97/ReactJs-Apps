@@ -34,4 +34,4 @@ const Repository = repo => (
   </Fragment>
 );
 
-export default Repository;
+export default React.memo(Repository);

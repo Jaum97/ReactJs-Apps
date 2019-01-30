@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const RepoList = styled.ul`
   background-color: gray;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 `;
 
