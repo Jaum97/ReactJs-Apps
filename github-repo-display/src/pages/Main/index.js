@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import api from '../../services/api';
 
 import RepoList from '../../components/RepoList/index';
+
 import InputBlock from '../../components/InputBlock';
 
 class Main extends Component {
   state = {
+    isLoading: false,
     repositories: [],
     repositoryInput: ''
   };
@@ -14,11 +16,16 @@ class Main extends Component {
   handleAddRepository = async e => {
     e.preventDefault();
 
-    const { repositoryInput, repositories } = this.state;
+    const { repositoryInput, repositories, isLoading } = this.state;
+
+    this.setState({ isLoading: true });
 
     const { data: repository } = await api.get(`/repos/${repositoryInput}`);
 
-    this.setState({ repositories: [...repositories, repository] });
+    this.setState({
+      repositories: [...repositories, repository],
+      isLoading: false
+    });
   };
 
   handleChangeValue = e => {
@@ -26,13 +33,14 @@ class Main extends Component {
   };
 
   render() {
-    const { repositories, repositoryInput } = this.state;
+    const { repositories, repositoryInput, isLoading } = this.state;
     return (
       <>
         <InputBlock
-          value={repositoryInput}
           handleAddRepository={this.handleAddRepository}
           handleChangeValue={this.handleChangeValue}
+          isLoading={isLoading}
+          value={repositoryInput}
         />
         <RepoList repositories={repositories} />
       </>
