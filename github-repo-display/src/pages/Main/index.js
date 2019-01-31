@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import api from '../../services/api';
 
 import RepoList from '../../components/RepoList/index';
+import InputBlock from '../../components/InputBlock';
 
 class Main extends Component {
   state = {
@@ -12,6 +13,7 @@ class Main extends Component {
 
   handleAddRepository = async e => {
     e.preventDefault();
+
     const { repositoryInput, repositories } = this.state;
 
     const { data: repository } = await api.get(`/repos/${repositoryInput}`);
@@ -19,20 +21,19 @@ class Main extends Component {
     this.setState({ repositories: [...repositories, repository] });
   };
 
+  handleChangeValue = e => {
+    this.setState({ repositoryInput: e.target.value });
+  };
+
   render() {
     const { repositories, repositoryInput } = this.state;
     return (
       <>
-        <h1>Main</h1>
-        <form onSubmit={this.handleAddRepository}>
-          <input
-            type="text"
-            placeholder="user/repo"
-            value={repositoryInput}
-            onChange={e => this.setState({ repositoryInput: e.target.value })}
-          />
-        </form>
-
+        <InputBlock
+          value={repositoryInput}
+          handleAddRepository={this.handleAddRepository}
+          handleChangeValue={this.handleChangeValue}
+        />
         <RepoList repositories={repositories} />
       </>
     );
