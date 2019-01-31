@@ -1,14 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import RepositoryContainer from './styles';
 
 const Repository = repo => (
-  <Fragment>
+  <RepositoryContainer>
     <header>
-      <img
-        src={repo.owner.avatar_url}
-        alt={repo.owner.login}
-        height={60}
-        width={60}
-      />
+      <img src={repo.owner.avatar_url} alt={repo.owner.login} />
       <strong>{repo.name}</strong>
       <small>{repo.owner.login}</small>
     </header>
@@ -31,7 +27,7 @@ const Repository = repo => (
         <small>last commit</small>
       </li>
     </ul>
-  </Fragment>
+  </RepositoryContainer>
 );
 
 export default React.memo(Repository);
