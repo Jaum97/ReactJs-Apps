@@ -3,22 +3,29 @@ import React, { Component } from 'react';
 import api from '../../services/api';
 
 import RepoList from '../../components/RepoList/index';
+
 import InputBlock from '../../components/InputBlock';
 
 class Main extends Component {
   state = {
     repositories: [],
-    repositoryInput: ''
+    repositoryInput: '',
+    loading: false
   };
 
   handleAddRepository = async e => {
     e.preventDefault();
 
-    const { repositoryInput, repositories } = this.state;
+    const { repositoryInput, repositories, loading } = this.state;
+
+    this.setState({ loading: true });
 
     const { data: repository } = await api.get(`/repos/${repositoryInput}`);
 
-    this.setState({ repositories: [...repositories, repository] });
+    this.setState({
+      repositories: [...repositories, repository],
+      loading: false
+    });
   };
 
   handleChangeValue = e => {
@@ -30,9 +37,10 @@ class Main extends Component {
     return (
       <>
         <InputBlock
-          value={repositoryInput}
           handleAddRepository={this.handleAddRepository}
           handleChangeValue={this.handleChangeValue}
+          loading={this.state.loading}
+          value={repositoryInput}
         />
         <RepoList repositories={repositories} />
       </>
