@@ -5,7 +5,7 @@ const InputBlock = ({
   handleAddRepository,
   handleChangeValue,
   repositoryInput,
-  isLoading
+  loading
 }) => (
   <InputContainer onSubmit={handleAddRepository}>
     <h1>Get Repo</h1>
@@ -15,7 +15,7 @@ const InputBlock = ({
       value={repositoryInput}
       onChange={handleChangeValue}
     />
-    <button type="submit">{isLoading ? 'Loading...' : 'OK'}</button>
+    <button type="submit">{loading ? 'Loading...' : 'OK'}</button>
   </InputContainer>
 );
 

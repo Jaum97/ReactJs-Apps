@@ -8,23 +8,23 @@ import InputBlock from '../../components/InputBlock';
 
 class Main extends Component {
   state = {
-    isLoading: false,
     repositories: [],
-    repositoryInput: ''
+    repositoryInput: '',
+    loading: false
   };
 
   handleAddRepository = async e => {
     e.preventDefault();
 
-    const { repositoryInput, repositories, isLoading } = this.state;
+    const { repositoryInput, repositories, loading } = this.state;
 
-    this.setState({ isLoading: true });
+    this.setState({ loading: true });
 
     const { data: repository } = await api.get(`/repos/${repositoryInput}`);
 
     this.setState({
       repositories: [...repositories, repository],
-      isLoading: false
+      loading: false
     });
   };
 
@@ -33,13 +33,13 @@ class Main extends Component {
   };
 
   render() {
-    const { repositories, repositoryInput, isLoading } = this.state;
+    const { repositories, repositoryInput } = this.state;
     return (
       <>
         <InputBlock
           handleAddRepository={this.handleAddRepository}
           handleChangeValue={this.handleChangeValue}
-          isLoading={isLoading}
+          loading={this.state.loading}
           value={repositoryInput}
         />
         <RepoList repositories={repositories} />

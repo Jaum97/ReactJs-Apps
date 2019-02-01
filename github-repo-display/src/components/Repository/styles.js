@@ -8,15 +8,33 @@ const RepositoryContainer = styled.div`
   justify-content: center;
 
   header {
+    padding: 30px;
     img {
-      height: 60px;
-      width: 60px;
+      width: 64px;
     }
     strong {
-      padding-top: 10px;
+      margin-top: 10px;
+      font-size: 24px;
     }
     small {
-      padding-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+  }
+  ul {
+    list-style: none;
+    li {
+      font-weight: bold;
+      padding: 12px 20px;
+      small {
+        font-weight: normal;
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+      }
+      &:nth-child(2n - 1) {
+        background: #f5f5f5;
+      }
     }
   }
 `;
